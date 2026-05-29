@@ -1142,36 +1142,11 @@ td:first-child{text-align:left}
               Ve a <strong style="color:var(--txt-1)">Extensiones → Apps Script</strong>, pega este código y despliégalo como Web App.
             </p>
             <pre style="background:var(--bg-input);border:1px solid var(--border-sm);border-radius:var(--r-md);
-              padding:14px;font-size:10.5px;color:var(--txt-2);overflow-x:auto;line-height:1.85;font-family:var(--font)"><code>function doGet(e) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheets=['BTC','ETH','BNB','SOL','DOGE','TON','GOLD'];
-  var cats={BTC:'crypto',ETH:'crypto',BNB:'crypto',
-    SOL:'crypto',DOGE:'crypto',TON:'crypto',GOLD:'commodity'};
-  var port = ss.getSheetByName('PORTAFOLIO');
-  var data = {
-    lastUpdate: Utilities.formatDate(
-      new Date(),'GMT-5','dd/MM/yyyy HH:mm'),
-    usdcop: port.getRange('E2').getValue(),
-    assets: []
-  };
-  sheets.forEach(function(t) {
-    var ws = ss.getSheetByName(t); if(!ws) return;
-    var isBTC = (t==='BTC');
-    data.assets.push({
-      ticker:   t, category: cats[t],
-      units:    isBTC?ws.getRange('L2').getValue()
-                    :ws.getRange('K2').getValue(),
-      avgBuy:   isBTC?ws.getRange('M2').getValue()
-                    :ws.getRange('L2').getValue(),
-      price:    isBTC?ws.getRange('N2').getValue()
-                    :ws.getRange('M2').getValue(),
-      invested: ws.getRange('I2').getValue()
-    });
-  });
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
-}</code></pre>
+              padding:14px;font-size:10.5px;color:var(--txt-2);overflow-x:auto;line-height:1.85;font-family:var(--font)"><code>// ── Pega el contenido de AppScript_Portfolio.js ──
+// Extensiones → Apps Script → reemplaza todo → Guardar
+// Implementar → Nueva implementación → Web App
+// Ejecutar como: Yo · Acceso: Cualquier usuario
+// Copia la URL generada y pégala abajo.</code></pre>
           </div>
         </div>
         <div class="card">
