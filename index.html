@@ -117,13 +117,13 @@ body{font-family:var(--font);background:var(--bg-base);color:var(--txt-1);
 .theme-tog .tog-btn{padding:2px 8px;font-size:12px}
 .theme-tog .tog-btn.active{color:var(--txt-1)}
 
-.sync-btn{display:flex;align-items:center;gap:5px;padding:5px 12px;
-  background:var(--accent-bg);border:1px solid var(--accent-bd);border-radius:var(--r-sm);
-  color:var(--accent);font-size:11px;font-weight:500;font-family:var(--font);
-  cursor:pointer;transition:opacity .2s}
-.sync-btn:hover{opacity:.8}
-@keyframes spin{to{transform:rotate(360deg)}}
-.spinning{animation:spin .7s linear infinite;display:inline-block}
+
+
+
+
+
+
+
 
 /* ── ADD BUTTON ── */
 .add-btn{display:flex;align-items:center;gap:5px;padding:5px 13px;
@@ -191,9 +191,11 @@ body{font-family:var(--font);background:var(--bg-base);color:var(--txt-1);
 
 .sync-btn{display:flex;align-items:center;gap:5px;padding:5px 12px;
   background:var(--accent-bg);border:1px solid var(--accent-bd);border-radius:var(--r-sm);
-  color:var(--accent);font-size:11px;font-weight:500;font-family:var(--font);
-  cursor:pointer;transition:opacity .2s}
-.sync-btn:hover{opacity:.8}
+  color:var(--accent);font-size:11px;font-weight:600;font-family:var(--font);
+  cursor:pointer;transition:all .2s}
+.sync-btn:hover{opacity:.8;transform:scale(1.03)}
+.sync-btn:active{transform:scale(.97)}
+.sync-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spinning{animation:spin .7s linear infinite;display:inline-block}
 
@@ -1866,93 +1868,11 @@ const KNOWN_TOKENS = [
 ];
 
 const PORTFOLIO = {
-  lastUpdate:"22/05/2026", usdcop:3689.01,
-  assets:[
-    // ── BTC (11 posiciones) ──────────────────────────────
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:102735,   units:0.0000292,  invested:3.00,  price:76723.60, date:"04/11/2025"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:103747,   units:0.0000289,  invested:3.00,  price:76723.60, date:"11/11/2025"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:97547,    units:0.0000513,  invested:5.00,  price:76723.60, date:"14/11/2025"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:91843,    units:0.0000544,  invested:5.00,  price:76723.60, date:"09/01/2026"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:96022,    units:0.0000521,  invested:5.00,  price:76723.60, date:"18/01/2026"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:89930,    units:0.0000478,  invested:4.00,  price:76723.60, date:"21/01/2026"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:83000,    units:0.00038551, invested:32.00, price:76723.60, date:"29/01/2026"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:76675,    units:0.00041734, invested:32.00, price:76723.60, date:"04/02/2026"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:63683,    units:0.00085,    invested:54.00, price:76723.60, date:"05/02/2026"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:73309,    units:0.0002619,  invested:19.00, price:76723.60, date:"10/04/2026"},
-    {ticker:"BTC",name:"Bitcoin",    category:"crypto",    avgBuy:79800,    units:0.00040099, invested:32.00, price:76723.60, date:"07/05/2026"},
-    // ── ETH (10 posiciones) ──────────────────────────────
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:3450,     units:0.00086956, invested:3.00,  price:2117.46,  date:"04/11/2025"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:3498,     units:0.00085743, invested:3.00,  price:2117.46,  date:"11/11/2025"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:3252,     units:0.00153708, invested:5.00,  price:2117.46,  date:"14/11/2025"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:3142,     units:0.00159111, invested:5.00,  price:2117.46,  date:"13/11/2025"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:3358,     units:0.00148857, invested:5.00,  price:2117.46,  date:"14/11/2025"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:3021,     units:0.00142305, invested:4.00,  price:2117.46,  date:"21/01/2026"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:2764,     units:0.00868255, invested:24.00, price:2117.46,  date:"29/01/2026"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:2277,     units:0.01053831, invested:24.00, price:2117.46,  date:"04/02/2026"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:2256,     units:0.00638134, invested:14.00, price:2117.46,  date:"10/04/2026"},
-    {ticker:"ETH",name:"Ethereum",   category:"crypto",    avgBuy:2289,     units:0.01048367, invested:24.00, price:2117.46,  date:"07/05/2026"},
-    // ── BNB (10 posiciones) ──────────────────────────────
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:934,      units:0.00321112, invested:3.00,  price:658.17,   date:"04/11/2025"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:977,      units:0.00306869, invested:3.00,  price:658.17,   date:"11/11/2025"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:935,      units:0.00534234, invested:5.00,  price:658.17,   date:"14/11/2025"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:902,      units:0.00554176, invested:5.00,  price:658.17,   date:"09/01/2026"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:953,      units:0.00524152, invested:5.00,  price:658.17,   date:"18/01/2026"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:893,      units:0.00481409, invested:4.00,  price:658.17,   date:"21/01/2026"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:848.36,   units:0.02357487, invested:20.00, price:658.17,   date:"29/01/2026"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:762.86,   units:0.02621706, invested:20.00, price:658.17,   date:"04/02/2026"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:609,      units:0.00164141, invested:12.00, price:658.17,   date:"10/04/2026"},
-    {ticker:"BNB",name:"BNB Chain",  category:"crypto",    avgBuy:641,      units:0.03118003, invested:20.00, price:658.17,   date:"07/05/2026"},
-    // ── SOL (10 posiciones) ──────────────────────────────
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:159,      units:0.01884136, invested:3.00,  price:86.72,    date:"04/11/2025"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:161,      units:0.01853908, invested:3.00,  price:86.72,    date:"11/11/2025"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:144,      units:0.03461519, invested:5.00,  price:86.72,    date:"14/11/2025"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:140,      units:0.03563645, invested:5.00,  price:86.72,    date:"09/01/2026"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:143,      units:0.03496343, invested:5.00,  price:86.72,    date:"18/01/2026"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:127,      units:0.03373422, invested:4.00,  price:86.72,    date:"20/01/2026"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:115,      units:0.12170467, invested:14.00, price:86.72,    date:"29/01/2026"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:98.74,    units:0.14178624, invested:14.00, price:86.72,    date:"04/02/2026"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:85,       units:0.09835609, invested:8.00,  price:86.72,    date:"10/04/2026"},
-    {ticker:"SOL",name:"Solana",     category:"crypto",    avgBuy:88.24,    units:0.15865252, invested:14.00, price:86.72,    date:"07/05/2026"},
-    // ── DOGE (10 posiciones) ─────────────────────────────
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.163,    units:18.6126,    invested:3.00,  price:0.1061,   date:"04/11/2025"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.170,    units:16.9079,    invested:3.00,  price:0.1061,   date:"11/11/2025"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.160,    units:30.3323,    invested:5.00,  price:0.1061,   date:"14/11/2025"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.140,    units:34.7123,    invested:5.00,  price:0.1061,   date:"09/01/2026"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.130,    units:36.3778,    invested:5.00,  price:0.1061,   date:"18/01/2026"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.120,    units:34.4403,    invested:4.00,  price:0.1061,   date:"20/01/2026"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.110,    units:34.6700,    invested:4.00,  price:0.1061,   date:"29/01/2026"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.100,    units:36.9933,    invested:4.00,  price:0.1061,   date:"04/02/2026"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.09437,  units:25.4319,    invested:2.40,  price:0.1061,   date:"10/04/2026"},
-    {ticker:"DOGE",name:"Dogecoin",  category:"crypto",    avgBuy:0.10791,  units:37.0665,    invested:4.00,  price:0.1061,   date:"07/05/2026"},
-    // ── TON (10 posiciones) ──────────────────────────────
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:2.00,     units:1.55174,    invested:3.00,  price:1.96,     date:"04/11/2025"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:2.00,     units:1.44465,    invested:3.00,  price:1.96,     date:"11/11/2025"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:1.80,     units:2.65712,    invested:5.00,  price:1.96,     date:"14/11/2025"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:2.00,     units:2.81177,    invested:5.00,  price:1.96,     date:"09/01/2026"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:1.77,     units:2.87955,    invested:5.00,  price:1.96,     date:"18/01/2026"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:1.50,     units:2.79768,    invested:4.00,  price:1.96,     date:"15/11/2025"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:1.50,     units:4.19605,    invested:6.00,  price:1.96,     date:"29/01/2026"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:1.39,     units:4.30750,    invested:6.00,  price:1.96,     date:"04/02/2026"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:1.20,     units:2.80421,    invested:4.00,  price:1.96,     date:"10/04/2026"},
-    {ticker:"TON", name:"Toncoin",   category:"crypto",    avgBuy:2.45218,  units:2.44680,    invested:6.00,  price:1.96,     date:"07/05/2026"},
-    // ── XAUT (5 posiciones) ──────────────────────────────
-    {ticker:"XAUT",name:"Tether Gold",category:"commodity",avgBuy:4607,     units:0.00752,    invested:35.00, price:4509.11,  date:"08/01/2026"},
-    {ticker:"XAUT",name:"Tether Gold",category:"commodity",avgBuy:5285,     units:0.007755,   invested:40.00, price:4509.11,  date:"27/01/2026"},
-    {ticker:"XAUT",name:"Tether Gold",category:"commodity",avgBuy:4873,     units:0.007200,   invested:35.00, price:4509.11,  date:"04/02/2026"},
-    {ticker:"XAUT",name:"Tether Gold",category:"commodity",avgBuy:4781,     units:0.004692,   invested:22.00, price:4509.11,  date:"15/04/2026"},
-    {ticker:"XAUT",name:"Tether Gold",category:"commodity",avgBuy:4730,     units:0.007390,   invested:35.00, price:4509.11,  date:""},
-  ],
-  savings: [
-    // ── CDTs y ahorro (datos de ejemplo — reemplaza con los tuyos) ──
-    // Campos: entidad, capitalCOP, tasaEA (decimal 0.115 = 11.5%), fechaAp, fechaVc
-    { entidad:"Bancolombia CDT", capitalCOP:5000000, tasaEA:0.115,
-      fechaAp:"2026-01-01", fechaVc:"2026-07-01" },
-    { entidad:"Davivienda CDT",  capitalCOP:3000000, tasaEA:0.120,
-      fechaAp:"2026-02-15", fechaVc:"2026-08-15" },
-    { entidad:"Nequi Bolsillo",  capitalCOP:1500000, tasaEA:0.090,
-      fechaAp:"2026-03-01", fechaVc:"2027-03-01" },
-  ]
-};
+  lastUpdate: null,
+  usdcop: 0,
+  assets: [],
+  savings: []
+}
 
 /* ══════════════════════════════════════════════════
    STATE
@@ -2038,10 +1958,10 @@ function renderKPIs(comp,port){
   gpEl.className='kpi-val '+(isG?'g':'l');
   document.getElementById('kpi-gp-card').className='kpi '+(isG?'gain-card':'loss-card');
   document.getElementById('kpi-gp-meta').innerHTML=pillH(port.pct)+' vs costo base';
-  document.getElementById('kpi-best').textContent=port.best.ticker;
-  document.getElementById('kpi-best-meta').innerHTML=pillH(port.best.gp_pct)+' rendimiento';
-  document.getElementById('ov-count').textContent=comp.length+' activos';
-  document.getElementById('ov-sub').textContent='Datos: '+S.data.lastUpdate;
+  document.getElementById('kpi-best').textContent     = comp.length ? port.best.ticker : '—';
+  document.getElementById('kpi-best-meta').innerHTML  = comp.length ? pillH(port.best.gp_pct)+' rendimiento' : 'Sin datos';
+  document.getElementById('ov-count').textContent     = comp.length ? comp.length+' activos' : 'Sin activos';
+  document.getElementById('ov-sub').textContent       = S.data.lastUpdate ? 'Datos: '+S.data.lastUpdate : 'Sincroniza para cargar datos';
 }
 
 /* ── Overview table ── */
@@ -2214,10 +2134,10 @@ function renderAnalysis(comp,port){
 ══════════════════════════════════════════════════ */
 function render(){
   const d=S.data; if(!d)return;
-  const comp=compute(d.assets,d.usdcop);
+  const comp=compute(d.assets||[],d.usdcop||0);
   const port=portfolio(comp);
-  document.getElementById('tb-date').textContent='Actualizado: '+d.lastUpdate;
-  document.getElementById('tb-cop').textContent=fN(d.usdcop,2);
+  document.getElementById('tb-date').textContent = d.lastUpdate ? 'Actualizado: '+d.lastUpdate : 'Sin sincronizar';
+  document.getElementById('tb-cop').textContent  = d.usdcop ? fN(d.usdcop,2) : '—';
   renderKPIs(comp,port);
   renderOvTable(comp,port);
   renderDonut('donut-svg','donut-legend','donut-num',comp,ff(port.val));
@@ -3805,27 +3725,95 @@ function mergeCuentasConceptos(conceptos, gastos){
 }
 
 async function syncData(){
-  const ico=document.getElementById('sync-ico');
+  const ico  = document.getElementById('sync-ico');
+  const btn  = ico?.closest('button');
   ico.classList.add('spinning');
-  // Lee desde el input; si está vacío (no visible aún) usa localStorage
-  const inputEl = document.getElementById('api-url');
-  const url = (inputEl?.value?.trim()) || localStorage.getItem('api_url_portfolio') || '';
-  // Sincroniza el input con el valor real
-  if(url && inputEl && !inputEl.value.trim()) inputEl.value = url;
-  if(url){
+  if(btn) btn.disabled = true;
+
+  // Siempre lee de localStorage como fuente de verdad
+  const urlPortfolio = localStorage.getItem('api_url_portfolio') || document.getElementById('api-url')?.value?.trim() || '';
+  const urlCuentas   = localStorage.getItem('api_url_cuentas')   || document.getElementById('api-url-cuentas')?.value?.trim() || '';
+
+  // Sincroniza inputs con localStorage
+  const elP = document.getElementById('api-url');
+  const elC = document.getElementById('api-url-cuentas');
+  if(elP && urlPortfolio) elP.value = urlPortfolio;
+  if(elC && urlCuentas)   elC.value = urlCuentas;
+
+  if(!urlPortfolio && !urlCuentas){
+    showToast('⚠ No hay URLs configuradas. Ve a Configuración.');
+    ico.classList.remove('spinning');
+    if(btn) btn.disabled = false;
+    return;
+  }
+
+  let okPortfolio = false;
+  let okCuentas   = false;
+  const errores   = [];
+
+  // ── Portafolio ──
+  if(urlPortfolio){
     try{
-      const r=await fetch(url); const d=await r.json();
-      S.data=d; render();
-      const st=document.getElementById('conn-status');
+      const r = await fetch(urlPortfolio);
+      const d = await r.json();
+      S.data = d; render();
+      const st = document.getElementById('conn-status');
       if(st){ st.textContent='Sincronizado ✓ · '+new Date().toLocaleTimeString('es-CO'); st.style.color='var(--gain)'; }
-      try{ localStorage.setItem('api_url_portfolio', url); }catch(e){}
+      okPortfolio = true;
     }catch(e){
-      const st=document.getElementById('conn-status');
+      errores.push('Portafolio: '+e.message);
+      const st = document.getElementById('conn-status');
       if(st){ st.textContent='Error: '+e.message; st.style.color='var(--loss)'; }
     }
   }
-  await new Promise(r=>setTimeout(r,900));
+
+  // ── Cuentas ──
+  if(urlCuentas){
+    try{
+      const mes  = MOV_DATA.mes || new Date().toLocaleString('es-CO',{month:'long'}).toLowerCase();
+      const anio = new Date().getFullYear();
+      const r = await fetch(`${urlCuentas}?action=getData&mes=${mes}&anio=${anio}`);
+      const d = await r.json();
+      if(!d.error){
+        if(d.ingresos  && d.ingresos.length)   MOV_DATA.ingresos   = d.ingresos;
+        if(d.conceptos && d.conceptos.length)   mergeCuentasConceptos(d.conceptos, d.gastos||[]);
+        if(d.compromisos && d.compromisos.length){
+          MOV_DATA.compromisos = d.compromisos.map(c=>({
+            id:c.id,nombre:c.acreedor,saldo:c.saldo,
+            cuota:c.cuota,tasa:c.tasa,
+            fecha:c.fechaInicio,estado:c.estado,notas:c.notas
+          }));
+        }
+        if(d.meDeben && d.meDeben.length)
+          MOV_DATA.meDeben = d.meDeben.map(m=>({quien:m.quien,monto:m.monto}));
+        if(d.mesActual) MOV_DATA.mes   = d.mesActual;
+        if(d.meses)     MOV_DATA.meses = d.meses.map(x=>x.mes);
+        if(S.page==='movimientos') renderMovDashboard();
+        const st = document.getElementById('conn-status-cuentas');
+        if(st){ st.textContent=`Datos cargados ✓ · ${mes} ${anio}`; st.style.color='var(--gain)'; }
+        okCuentas = true;
+      } else {
+        errores.push('Cuentas: '+(d.mensaje||'error desconocido'));
+      }
+    }catch(e){
+      errores.push('Cuentas: '+e.message);
+    }
+  }
+
+  // ── Toast de resultado ──
+  if(okPortfolio && okCuentas){
+    showToast('✓ Todo sincronizado · '+new Date().toLocaleTimeString('es-CO'));
+  } else if(okPortfolio){
+    showToast('✓ Portafolio sincronizado');
+  } else if(okCuentas){
+    showToast('✓ Cuentas sincronizadas');
+  } else if(errores.length){
+    showToast('⚠ Error al sincronizar. Verifica conexión.');
+  }
+
+  await new Promise(r=>setTimeout(r,600));
   ico.classList.remove('spinning');
+  if(btn) btn.disabled = false;
 }
 async function testConnection(){
   const url=document.getElementById('api-url').value.trim();
