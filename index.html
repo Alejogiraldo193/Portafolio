@@ -1188,16 +1188,20 @@ td:first-child{text-align:left}
                   onfocus="this.style.borderColor='var(--accent)'"
                   onblur="this.style.borderColor='var(--border-sm)'">
               </div>
-              <div style="display:flex;gap:8px">
+              <div style="display:flex;gap:8px;margin-bottom:8px">
+                <button onclick="saveApiUrls()" style="flex:1;padding:8px;
+                  background:linear-gradient(135deg,#10B981,#059669);border:none;
+                  border-radius:var(--r-sm);color:#fff;font-size:12px;font-weight:700;
+                  font-family:var(--font);cursor:pointer">💾 Guardar URLs</button>
                 <button onclick="testConnection()" style="flex:1;padding:8px;background:var(--accent-bg);
                   border:1px solid var(--accent-bd);border-radius:var(--r-sm);color:var(--accent);
                   font-size:12px;font-weight:500;font-family:var(--font);cursor:pointer">Probar</button>
                 <button onclick="loadFromSheets()" style="flex:1;padding:8px;
                   background:linear-gradient(135deg,#3B82F6,#2563EB);border:none;
                   border-radius:var(--r-sm);color:#fff;font-size:12px;font-weight:600;
-                  font-family:var(--font);cursor:pointer">Cargar datos</button>
+                  font-family:var(--font);cursor:pointer">Cargar</button>
               </div>
-              <div id="conn-status" style="font-size:11px;color:var(--txt-3);padding:8px 10px;margin-top:8px;
+              <div id="conn-status" style="font-size:11px;color:var(--txt-3);padding:8px 10px;
                 background:var(--bg-card);border-radius:var(--r-sm);border:1px solid var(--border-xs)">
                 Estado: Sin configurar
               </div>
@@ -1213,16 +1217,20 @@ td:first-child{text-align:left}
                   onfocus="this.style.borderColor='var(--accent)'"
                   onblur="this.style.borderColor='var(--border-sm)'">
               </div>
-              <div style="display:flex;gap:8px">
+              <div style="display:flex;gap:8px;margin-bottom:8px">
+                <button onclick="saveApiUrls()" style="flex:1;padding:8px;
+                  background:linear-gradient(135deg,#10B981,#059669);border:none;
+                  border-radius:var(--r-sm);color:#fff;font-size:12px;font-weight:700;
+                  font-family:var(--font);cursor:pointer">💾 Guardar URLs</button>
                 <button onclick="testCuentasConnection()" style="flex:1;padding:8px;background:var(--accent-bg);
                   border:1px solid var(--accent-bd);border-radius:var(--r-sm);color:var(--accent);
                   font-size:12px;font-weight:500;font-family:var(--font);cursor:pointer">Probar</button>
                 <button onclick="loadFromCuentas()" style="flex:1;padding:8px;
                   background:linear-gradient(135deg,#6366F1,#4F46E5);border:none;
                   border-radius:var(--r-sm);color:#fff;font-size:12px;font-weight:600;
-                  font-family:var(--font);cursor:pointer">Cargar datos</button>
+                  font-family:var(--font);cursor:pointer">Cargar</button>
               </div>
-              <div id="conn-status-cuentas" style="font-size:11px;color:var(--txt-3);padding:8px 10px;margin-top:8px;
+              <div id="conn-status-cuentas" style="font-size:11px;color:var(--txt-3);padding:8px 10px;
                 background:var(--bg-card);border-radius:var(--r-sm);border:1px solid var(--border-xs)">
                 Estado: Sin configurar
               </div>
@@ -3830,6 +3838,31 @@ async function testConnection(){
 }
 async function loadFromSheets(){await syncData();}
 
+function saveApiUrls(){
+  const urlP = document.getElementById('api-url')?.value?.trim();
+  const urlC = document.getElementById('api-url-cuentas')?.value?.trim();
+  let saved  = [];
+
+  if(urlP){
+    localStorage.setItem('api_url_portfolio', urlP);
+    saved.push('Portafolio');
+    const st = document.getElementById('conn-status');
+    if(st){ st.textContent='✓ URL guardada · lista para sincronizar'; st.style.color='var(--gain)'; }
+  }
+  if(urlC){
+    localStorage.setItem('api_url_cuentas', urlC);
+    saved.push('Cuentas');
+    const st = document.getElementById('conn-status-cuentas');
+    if(st){ st.textContent='✓ URL guardada · lista para sincronizar'; st.style.color='var(--gain)'; }
+  }
+
+  if(saved.length){
+    showToast('💾 URLs guardadas: '+saved.join(' + ')+' · Toca Sincronizar');
+  } else {
+    showToast('⚠ Ingresa al menos una URL antes de guardar');
+  }
+}
+
 /* ══════════════════════════════════════════════════
    INIT
 ══════════════════════════════════════════════════ */
@@ -3843,6 +3876,11 @@ window.addEventListener('DOMContentLoaded',()=>{
     const savedCuentas   = localStorage.getItem('api_url_cuentas');
     if(savedPortfolio){ const el=document.getElementById('api-url'); if(el) el.value=savedPortfolio; }
     if(savedCuentas){   const el=document.getElementById('api-url-cuentas'); if(el) el.value=savedCuentas; }
+    // Mostrar estado guardado en los indicadores
+    const stP = document.getElementById('conn-status');
+    const stC = document.getElementById('conn-status-cuentas');
+    if(savedPortfolio && stP){ stP.textContent='✓ URL guardada · sincronizando...'; stP.style.color='var(--gain)'; }
+    if(savedCuentas   && stC){ stC.textContent='✓ URL guardada · sincronizando...'; stC.style.color='var(--gain)'; }
     // Auto-sync si hay URLs guardadas
     if(savedPortfolio) setTimeout(()=>syncData(), 1200);
     if(savedCuentas)   setTimeout(()=>loadFromCuentas(), 1800);
