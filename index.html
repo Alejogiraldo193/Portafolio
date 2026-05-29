@@ -3843,12 +3843,15 @@ window.addEventListener('DOMContentLoaded',()=>{
   S.data=PORTFOLIO;
   render();
 
-  // Restore saved API URLs
+  // Restore saved API URLs and auto-sync
   try{
     const savedPortfolio = localStorage.getItem('api_url_portfolio');
     const savedCuentas   = localStorage.getItem('api_url_cuentas');
     if(savedPortfolio){ const el=document.getElementById('api-url'); if(el) el.value=savedPortfolio; }
     if(savedCuentas){   const el=document.getElementById('api-url-cuentas'); if(el) el.value=savedCuentas; }
+    // Auto-sync si hay URLs guardadas
+    if(savedPortfolio) setTimeout(()=>syncData(), 800);
+    if(savedCuentas)   setTimeout(()=>loadFromCuentas(), 1200);
   }catch(e){}
 
   // Restore sidebar collapsed state
