@@ -3727,9 +3727,12 @@ async function testCuentasConnection(){
 }
 
 async function loadFromCuentas(){
-  const url = document.getElementById('api-url-cuentas').value.trim();
+  const inputEl = document.getElementById('api-url-cuentas');
+  const url = (inputEl?.value?.trim()) || localStorage.getItem('api_url_cuentas') || '';
+  // Sincroniza el input con el valor real
+  if(url && inputEl && !inputEl.value.trim()) inputEl.value = url;
   const st  = document.getElementById('conn-status-cuentas');
-  if(!url){ st.textContent='Ingresa la URL del deployment'; return; }
+  if(!url){ if(st) st.textContent='Ingresa la URL del deployment'; return; }
   st.textContent='Cargando...'; st.style.color='var(--txt-2)';
   try{
     // Request the month that matches MOV_DATA.mes (may differ from current calendar month)
@@ -3804,18 +3807,21 @@ function mergeCuentasConceptos(conceptos, gastos){
 async function syncData(){
   const ico=document.getElementById('sync-ico');
   ico.classList.add('spinning');
-  const url=document.getElementById('api-url')?.value?.trim();
+  // Lee desde el input; si está vacío (no visible aún) usa localStorage
+  const inputEl = document.getElementById('api-url');
+  const url = (inputEl?.value?.trim()) || localStorage.getItem('api_url_portfolio') || '';
+  // Sincroniza el input con el valor real
+  if(url && inputEl && !inputEl.value.trim()) inputEl.value = url;
   if(url){
     try{
       const r=await fetch(url); const d=await r.json();
       S.data=d; render();
       const st=document.getElementById('conn-status');
-      st.textContent='Sincronizado ✓ · '+new Date().toLocaleTimeString('es-CO');
-      st.style.color='var(--gain)';
+      if(st){ st.textContent='Sincronizado ✓ · '+new Date().toLocaleTimeString('es-CO'); st.style.color='var(--gain)'; }
       try{ localStorage.setItem('api_url_portfolio', url); }catch(e){}
     }catch(e){
       const st=document.getElementById('conn-status');
-      st.textContent='Error: '+e.message; st.style.color='var(--loss)';
+      if(st){ st.textContent='Error: '+e.message; st.style.color='var(--loss)'; }
     }
   }
   await new Promise(r=>setTimeout(r,900));
@@ -3850,8 +3856,8 @@ window.addEventListener('DOMContentLoaded',()=>{
     if(savedPortfolio){ const el=document.getElementById('api-url'); if(el) el.value=savedPortfolio; }
     if(savedCuentas){   const el=document.getElementById('api-url-cuentas'); if(el) el.value=savedCuentas; }
     // Auto-sync si hay URLs guardadas
-    if(savedPortfolio) setTimeout(()=>syncData(), 800);
-    if(savedCuentas)   setTimeout(()=>loadFromCuentas(), 1200);
+    if(savedPortfolio) setTimeout(()=>syncData(), 1200);
+    if(savedCuentas)   setTimeout(()=>loadFromCuentas(), 1800);
   }catch(e){}
 
   // Restore sidebar collapsed state
